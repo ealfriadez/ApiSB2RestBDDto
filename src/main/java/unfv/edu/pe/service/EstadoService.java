@@ -36,6 +36,10 @@ public class EstadoService implements BaseService<Estado>{
 		entity = estadoRepository.save(entity);
 		return entity;
 	}
+	
+	public void guardarVarios(List<Estado> estados) {
+		estadoRepository.saveAll(estados);
+	}
 
 	@Override
 	public HashMap<String, String> eliminarPorId(Long id) {		

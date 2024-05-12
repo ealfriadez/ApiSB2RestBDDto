@@ -7,9 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import unfv.edu.pe.exception.ResourceNotFoundException;
 import unfv.edu.pe.model.Estado;
 import unfv.edu.pe.service.EstadoService;
 
@@ -29,5 +34,32 @@ public class EstadoController {
 		}else {
 			return new ResponseEntity<>(estados, HttpStatus.OK);
 		}
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Estado> obtenerEstadoPorId(
+			@PathVariable("id") long id){		
+		Estado estado = service.obtenerPorId(id)
+				.orElseThrow(()->
+				new ResourceNotFoundException("Recurso con el id: " + id + " no encontrado"));						
+		return new ResponseEntity<>(estado, HttpStatus.OK);
+	}
+	
+	@PostMapping("")
+	public ResponseEntity<Estado> crearEstado(@RequestBody Estado estado){
+		Estado nuevoestado = service.guardar(estado);
+		return new ResponseEntity<>(nuevoestado, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Estado> actualizarEstado(
+			@PathVariable("id") long id,
+			@RequestBody Estado estado
+			){
+		Estado estadoactualizar = service.obtenerPorId(id)
+				.orElseThrow(()->
+				new ResourceNotFoundException("Recurso con el id: " + id + " no encontrado"));
+		estadoactualizar.setDescestado(estado.getDescestado());
+		return new ResponseEntity<>(service.guardar(estadoactualizar), HttpStatus.OK);	
 	}
 }
