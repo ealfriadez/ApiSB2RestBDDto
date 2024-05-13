@@ -1,5 +1,7 @@
 package unfv.edu.pe.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -7,16 +9,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import jakarta.transaction.Transactional;
-import unfv.edu.pe.model.Empleado;
+import unfv.edu.pe.model.security.Usuario;
 
 @Repository
-public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
-	@Transactional
-	@Modifying
-	@Query(value = "{call sp_RegistrarEmpleado(:nombre, :apellido)}", nativeQuery = true)
-	void registrarEmpleado(
-			@Param("nombre") String nombre,
-			@Param("apellido") String apellido
-	);
+	@Query(value = "{call sp_AutenticarUsuario(:usuario, :password)}", nativeQuery = true)
+	public Optional<Usuario> autenticarUsuario(
+			@Param("usuario") String usuario,
+			@Param("password") String password					
+			); 
 }
