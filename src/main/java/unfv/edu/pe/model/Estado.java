@@ -12,7 +12,6 @@ import jakarta.persistence.Table;
 public class Estado {
 
 	@Id
-	@Column(name = "idestado")
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //Esto esta alineado a como se creo la tabla en la BD
 	private Long idestado;
 
