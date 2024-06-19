@@ -14,10 +14,10 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class FiltroJWTAutorizacion extends OncePerRequestFilter{
 
@@ -30,7 +30,7 @@ public class FiltroJWTAutorizacion extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		try {
 			if (validarUsoDeJWTToken(request, response)) {
-				Claims claims = validarToken(null);
+				Claims claims = validarToken(request);
 				if (claims.get("authorities") != null) {
 					crearAutenticacion(claims);
 				}else {

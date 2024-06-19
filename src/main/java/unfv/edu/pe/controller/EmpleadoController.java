@@ -18,9 +18,11 @@ public class EmpleadoController {
 	@Autowired
 	EmpleadoService service;
 	
-	@PostMapping
+	@PostMapping("")
 	public ResponseEntity<?> registrarEmpleado(@RequestBody Empleado empleado){
-		return new ResponseEntity<>(service.registrarEmpleado(new Empleado(
-				empleado.getNombre(), empleado.getApellido())), HttpStatus.CREATED);
+		return new ResponseEntity<>(service.registrarEmpleado(
+				new Empleado(
+						empleado.getNombre(), 
+						empleado.getApellido())), HttpStatus.CREATED);
 	}
 }

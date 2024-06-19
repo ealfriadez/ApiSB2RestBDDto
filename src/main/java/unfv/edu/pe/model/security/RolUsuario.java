@@ -1,23 +1,23 @@
 package unfv.edu.pe.model.security;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class RolUsuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idurol;
+	private Long idrol;
 	private String nomrol;
 	
 	public Long getIdurol() {
-		return idurol;
+		return idrol;
 	}
 	public void setIdurol(Long idurol) {
-		this.idurol = idurol;
+		this.idrol = idurol;
 	}
 	public String getNomrol() {
 		return nomrol;

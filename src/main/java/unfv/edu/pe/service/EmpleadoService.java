@@ -15,7 +15,9 @@ public class EmpleadoService {
 	EmpleadoRepository repository;
 	
 	public HashMap<String, String> registrarEmpleado(Empleado empleado){
-		repository.registrarEmpleado(empleado.getNombre(), empleado.getApellido());
+		repository.registrarEmpleado(
+				empleado.getNombre(), 
+				empleado.getApellido());
 		HashMap<String, String> respuesta = new HashMap<String, String>();
 		respuesta.put("mensaje", "Elemento registrado correctamente");
 		return respuesta;
