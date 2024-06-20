@@ -21,11 +21,13 @@ import unfv.edu.pe.service.EstadoService;
 
 @RestController
 @RequestMapping(path = "api/v1/estado")
+//@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.DELETE})
 public class EstadoController {
 
 	@Autowired
 	private EstadoService service;
 	
+	//@CrossOrigin(origins = "*")
 	@GetMapping("")
 	public ResponseEntity<List<Estado>> ontenerTodo(){
 		List<Estado> estados = new ArrayList<Estado>();
