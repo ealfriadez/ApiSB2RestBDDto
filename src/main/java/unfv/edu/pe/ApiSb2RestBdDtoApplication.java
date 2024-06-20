@@ -27,20 +27,19 @@ public class ApiSb2RestBdDtoApplication {
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-            http.csrf().disable()
+            http.csrf(csrf -> csrf.disable())
                     .addFilterBefore(new FiltroJWTAutorizacion(),
                             UsernamePasswordAuthenticationFilter.class)
-                    .authorizeRequests()//requests -> requests
-                            //.antMatchers(HttpMethod.POST, "/api/v1/seguridad")						
-							 .antMatchers(
-									 "/api/v1/seguridad/**", 
-									 "/v2/api-docs/**", 
-									 "/swagger-ui/**",
-									 "/swagger-resources/**",
-									 "/configuration/**")							 
+                    .authorizeRequests(requests -> requests
+                            .antMatchers(
+                                    "/api/v1/seguridad/**",
+                                    "/v2/api-docs/**",
+                                    "/swagger-ui/**",
+                                    "/swagger-resources/**",
+                                    "/configuration/**")
                             .permitAll()
                             .anyRequest()
-                            .authenticated();
+                            .authenticated());
 		
 		}
 		
