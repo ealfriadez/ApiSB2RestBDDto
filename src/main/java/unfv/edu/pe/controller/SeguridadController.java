@@ -28,7 +28,7 @@ public class SeguridadController {
 	@Autowired
 	SeguridadService service;
 	
-	@PostMapping("")
+	@PostMapping("/autenticacion")
 	public ResponseEntity<UsuarioResponse> autenticacionDeUsuario(
 			@RequestParam("usuario") String usuario,
 			@RequestParam("password") String password){
@@ -52,7 +52,8 @@ public class SeguridadController {
 	
 	private String generarToken(String usuario, Long idUsuario) {
 		final String claveSecreta = "@EALFRIADEZ2024"; //Este dato debe de venir de la BD
-		List<GrantedAuthority> lstAutorizacion = AuthorityUtils.createAuthorityList(
+		List<GrantedAuthority> lstAutorizacion = 
+				AuthorityUtils.createAuthorityList(
 				service.listarRolesPorUsuario(idUsuario));
 		
 		String token = Jwts

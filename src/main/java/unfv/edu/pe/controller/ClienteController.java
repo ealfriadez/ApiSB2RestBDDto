@@ -15,6 +15,7 @@ import unfv.edu.pe.exception.ResourceNotFoundException;
 import unfv.edu.pe.model.Cliente;
 import unfv.edu.pe.service.ClienteService;
 
+//@PreAuthorize("hasRole('ADMIN')")
 @RestController
 @RequestMapping(path = "api/v1/cliente")
 public class ClienteController {
@@ -22,6 +23,7 @@ public class ClienteController {
 	@Autowired
 	ClienteService service;
 	
+	//@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/dni/{dni}")
 	public ResponseEntity<Cliente> buscarClientePorDni(
 			@PathVariable("dni") String dni)
